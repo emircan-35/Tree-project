@@ -43,8 +43,6 @@ public class Tree {
 		}
 		length++;
 	}
-	
-	
 	private int findIntEquilavent(Object dataToConvert) {
 		int equilavent=0;
 		char[] charToAdd=((String)dataToConvert).toCharArray();
@@ -55,20 +53,31 @@ public class Tree {
 	}
 	
 	public void printTree() {
-		print(root,10,0);
+		print(root,15,0);
 	}
+
 	private void print(Node node, int x, int y) {
 		if (node.getLeftNode()!=null) {
-			print(node.getLeftNode(),x-3,y+3);
+			int lineX=x;
+			int lineY=y;
+			for (int i = 0; i < 3; i++) {
+				lineX--;lineY++;
+				this.cn.getTextWindow().setCursorPosition(lineX, lineY);
+				this.cn.getTextWindow().output('/');
+			}
+			print(node.getLeftNode(),x-4,y+4);
 		}
 		if (node.getRightNode()!=null) {
-			print(node.getRightNode(),x+3,y+3);
+			int lineX=x;
+			int lineY=y;
+			for (int i = 0; i < 3; i++) {
+				lineX++;lineY++;
+				this.cn.getTextWindow().setCursorPosition(lineX, lineY);
+				this.cn.getTextWindow().output("\\");
+			}
+			print(node.getRightNode(),x+4,y+4);
 		}
 		this.cn.getTextWindow().setCursorPosition(x, y);
 		this.cn.getTextWindow().output(Integer.toString((int)node.getData()));
-		
 	}
-	
-	
-	
 }
