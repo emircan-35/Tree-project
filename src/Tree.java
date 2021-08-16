@@ -26,7 +26,7 @@ public class Tree {
 		}
 		Node node=this.root;
 		while (true) {
-			if ((int)node.getData()<numberToAdd) {
+			if ((int)node.getData()>numberToAdd) {
 				if (node.getLeftNode()!=null) node=node.getLeftNode();
 				else {
 					left=true; break;
@@ -53,9 +53,21 @@ public class Tree {
 	}
 	
 	public void printTree() {
-		print(root,15,0);
+		print(root,50,0);
 	}
-
+	public boolean search(int numberToSearch) {
+		Node root=this.root;
+		while (root!=null) {
+			if (numberToSearch==(int)root.getData()) {
+				return true;
+			}else if(numberToSearch<(int)root.getData()) {
+				root=root.getLeftNode();
+			}else {
+				root=root.getRightNode();
+			}
+		}
+		return false;
+	}
 	private void print(Node node, int x, int y) {
 		if (node.getLeftNode()!=null) {
 			int lineX=x;
