@@ -68,6 +68,7 @@ public class Program {
 	}
 	
 	public void newTree() {
+		deletePrintArea();
 		cn.getTextWindow().setCursorPosition(0, 12);
 		cn.getTextWindow().output("PLEASE ENTER THE LENGTH YOU WANT THE TREE TO BE\n");
 		cn.getTextWindow().output("--> ");
@@ -83,6 +84,7 @@ public class Program {
 		}
 		this.tree=new Tree(length);
 		deleteInputArea();
+		deletePrintArea();
 		tree.printTree(cn);
 	}
 	
@@ -101,15 +103,50 @@ public class Program {
 			return;
 		}
 		tree.addBinary(numberToAdd);
+		deleteInputArea();
+		deletePrintArea();
 		tree.printTree(cn);
 	}
 	
 	public void search() {
+		cn.getTextWindow().setCursorPosition(0, 12);
+		cn.getTextWindow().output("PLEASE ENTER THE NUMBER YOU WANT TO SEARCH\n");
+		cn.getTextWindow().output("--> ");
+		Scanner inp =new Scanner(System.in);
+		String input=inp.nextLine();
+		int numberToDelete;
+		try {
+			numberToDelete=Integer.parseInt(input);
+		} catch (Exception ClassCastException) {
+			System.out.println("PLEASE WRITE A VALID NUMBER");
+			deleteInputArea();
+			return;
+		}
+		this.tree.search(cn,numberToDelete);
+		deleteInputArea();
+		deletePrintArea();
+		this.tree.printTree(cn);
 		
 	}
 	
 	public void delete() {
-		
+		cn.getTextWindow().setCursorPosition(0, 12);
+		cn.getTextWindow().output("PLEASE ENTER THE NUMBER YOU WANT TO DELETE\n");
+		cn.getTextWindow().output("--> ");
+		Scanner inp =new Scanner(System.in);
+		String input=inp.nextLine();
+		int numberToDelete;
+		try {
+			numberToDelete=Integer.parseInt(input);
+		} catch (Exception ClassCastException) {
+			System.out.println("PLEASE WRITE A VALID NUMBER");
+			deleteInputArea();
+			return;
+		}
+		this.tree.delete(numberToDelete);
+		deleteInputArea();
+		deletePrintArea();
+		this.tree.printTree(cn);
 	}
 	
 	public void deleteInputArea() {
@@ -118,7 +155,11 @@ public class Program {
 			cn.getTextWindow().output("                                             ");
 		}
 	}
-	
-	
+	public void deletePrintArea() {
+		for (int i = 0; i < 30; i++) {
+			cn.getTextWindow().setCursorPosition(40, i);
+			cn.getTextWindow().output("           				                                   ");
+		}
+	}
 }
 
