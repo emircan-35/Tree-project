@@ -1,4 +1,5 @@
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import enigma.console.TextAttributes;
 import enigma.core.Enigma;
@@ -12,6 +13,15 @@ public class Tree {
 	Tree(Object data){
 		this.root=new Node(data);
 		this.length=0;
+	}
+	Tree(int length){
+		Random rnd=new Random();
+		this.root=new Node(10);
+		for (int i = 0; i < length; i++) {
+			int number=rnd.nextInt(100)+1;
+			if (rnd.nextInt(2)==1) number*=-1;
+			addBinary(number);
+		}
 	}
 	
 	public void addBinary(Object dataToAdd) {
@@ -51,7 +61,7 @@ public class Tree {
 	}
 	
 	public void printTree(enigma.console.Console cn) {
-		print(cn,root,15,0);
+		print(cn,root,75,0);
 	}
 
 	private void print(enigma.console.Console cn,Node node, int x, int y) {
