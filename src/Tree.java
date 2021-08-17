@@ -7,13 +7,11 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 public class Tree {
-	private enigma.console.Console cn;
 	private Node root;
 	private int length;
 	Tree(Object data){
 		this.root=new Node(data);
 		this.length=0;
-		this.cn = Enigma.getConsole("Tree App", 120, 30, 15);
 	}
 	
 	public void addBinary(Object dataToAdd) {
@@ -52,32 +50,32 @@ public class Tree {
 		return equilavent;
 	}
 	
-	public void printTree() {
-		print(root,15,0);
+	public void printTree(enigma.console.Console cn) {
+		print(cn,root,15,0);
 	}
 
-	private void print(Node node, int x, int y) {
+	private void print(enigma.console.Console cn,Node node, int x, int y) {
 		if (node.getLeftNode()!=null) {
 			int lineX=x;
 			int lineY=y;
 			for (int i = 0; i < 3; i++) {
 				lineX--;lineY++;
-				this.cn.getTextWindow().setCursorPosition(lineX, lineY);
-				this.cn.getTextWindow().output('/');
+				cn.getTextWindow().setCursorPosition(lineX, lineY);
+				cn.getTextWindow().output('/');
 			}
-			print(node.getLeftNode(),x-4,y+4);
+			print(cn,node.getLeftNode(),x-4,y+4);
 		}
 		if (node.getRightNode()!=null) {
 			int lineX=x;
 			int lineY=y;
 			for (int i = 0; i < 3; i++) {
 				lineX++;lineY++;
-				this.cn.getTextWindow().setCursorPosition(lineX, lineY);
-				this.cn.getTextWindow().output("\\");
+				cn.getTextWindow().setCursorPosition(lineX, lineY);
+				cn.getTextWindow().output("\\");
 			}
-			print(node.getRightNode(),x+4,y+4);
+			print(cn,node.getRightNode(),x+4,y+4);
 		}
-		this.cn.getTextWindow().setCursorPosition(x, y);
-		this.cn.getTextWindow().output(Integer.toString((int)node.getData()));
+		cn.getTextWindow().setCursorPosition(x, y);
+		cn.getTextWindow().output(Integer.toString((int)node.getData()));
 	}
 }
